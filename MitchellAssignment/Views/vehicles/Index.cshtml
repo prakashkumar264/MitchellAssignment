@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MitchellAssignment.Models.vehicle>
+
+@{
+    ViewBag.Title = "Index";
+    List<MitchellAssignment.Models.MakeData> vehicles = Session["Make"] as List<MitchellAssignment.Models.MakeData>;
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index", "vehicles", FormMethod.Post))
+{
+    <select id="Make" name="Make">
+        <option value="" selected disabled>--Select Vehicle Make--</option>
+        @foreach (var item in vehicles)
+        {
+            <option value="@item.Make"> @item.Make</option>
+        }
+    </select>
+    <input type="submit" value="Submit" />
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Make)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
