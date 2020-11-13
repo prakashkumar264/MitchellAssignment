@@ -12,11 +12,20 @@ using MitchellAssignment.Models;
 
 namespace MitchellAssignment.Controllers
 {
+    /// <summary>
+    /// Contains all the required methods to perform CRUD operations
+    /// </summary>
     public class vehiclesController : Controller
     {
+       
         private dbContext db = new dbContext();
 
         // GET: vehicles
+        /// <summary>
+        /// Returns the list of the vehicles in database
+        /// Creates a session for enum of all makes in the vehicles db.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult Index()
         {
@@ -24,6 +33,11 @@ namespace MitchellAssignment.Controllers
             return View("Index", db.vehicles.ToList());
         }
 
+        /// <summary>
+        /// Returns list of vehicles based on make filter
+        /// </summary>
+        /// <param name="formCollection"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Index(FormCollection formCollection)
         {
@@ -31,6 +45,11 @@ namespace MitchellAssignment.Controllers
             return View("Index", db.vehicles.SqlQuery("Select * from dbo.vehicles where Make = @Make", new SqlParameter("@Make", Make)).ToList());
         }
 
+        /// <summary>
+        /// Get details of vehicle based on id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: vehicles/Details/5
         public ActionResult Details(int? id)
          {
@@ -54,8 +73,11 @@ namespace MitchellAssignment.Controllers
         }
 
         // POST: vehicles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Creates vehicle data
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Name,Make,Year")] vehicle vehicle)
@@ -72,6 +94,11 @@ namespace MitchellAssignment.Controllers
         }
 
         // GET: vehicles/Edit/5
+        /// <summary>
+        /// Get vehicle for edit based on id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,8 +114,11 @@ namespace MitchellAssignment.Controllers
         }
 
         // POST: vehicles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Edits the selected vehicle
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Name,Make,Year")] vehicle vehicle)
@@ -118,6 +148,11 @@ namespace MitchellAssignment.Controllers
         }
 
         // POST: vehicles/Delete/5
+        /// <summary>
+        /// Deletes the selected vehicle based on id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

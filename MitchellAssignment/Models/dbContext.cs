@@ -8,6 +8,9 @@ namespace MitchellAssignment.Models
 {
     public class dbContext : DbContext
     {
+        /// <summary>
+        /// This class connects to the database using the connection string DBModel from web.config
+        /// </summary>
         public dbContext() : base("DBModel")
         {
 

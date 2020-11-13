@@ -6,6 +6,9 @@ using System.Web;
 
 namespace MitchellAssignment.Models
 {
+    /// <summary>
+    /// Vehicle model based on the requirements
+    /// </summary>
     public class vehicle
     {
         [Key]
