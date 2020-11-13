@@ -83,7 +83,7 @@ namespace MitchellAssignment.Controllers
             {
                 return HttpNotFound();
             }
-            return View(vehicle);
+            return View("Edit", vehicle);
         }
 
         // POST: vehicles/Edit/5
