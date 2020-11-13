@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -44,16 +46,6 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void Test_Index_Filter()
-        {
-            vehiclesController controller = new vehiclesController();
-            FormCollection form = new FormCollection();
-            form["Make"] = "Maruti";
-            ViewResult result = controller.Index(form) as ViewResult;
-            Assert.AreEqual("Index", result.ViewName);
-        }
-
-        [TestMethod]
         public void Test_DetailView()
         {
             vehiclesController controller = new vehiclesController();
@@ -69,8 +61,33 @@ namespace UnitTestProject
             Assert.AreEqual("400", vehicle.StatusCode.ToString());
         }
 
+        [TestMethod]
+        public void TestCreateMake()
+        {
+            vehiclesController controller = new vehiclesController();
+            RedirectToRouteResult result = controller.Create(new vehicle()
+            {
+                Make = "TestFilter",
+                Name = "Prakash",
+                Year = 2050
+            }) as RedirectToRouteResult;
+            FormCollection form = new FormCollection();
+            form["Make"] = "TestFilter";
+            ViewResult viewResult = controller.Index(form) as ViewResult;
+            var s = (IEnumerable<vehicle>) viewResult.ViewData.Model;
+            Assert.AreEqual(1, s.Count());
+        }
 
-
+        [TestMethod]
+        public void Test_Index_Filter()
+        {
+            vehiclesController controller = new vehiclesController();
+            FormCollection form = new FormCollection();
+            form["Make"] = "TestFilter";
+            ViewResult viewResult = controller.Index(form) as ViewResult;
+            var s = (IEnumerable<vehicle>)viewResult.ViewData.Model;
+            Assert.AreEqual(1, s.Count());
+        }
 
     }
 }
