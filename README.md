@@ -19,15 +19,13 @@ This git contains the solution and script which contains the script to create th
  
  
 ## Testing the solution: <br />
-> Note: 	The test cases assumes the database is empty and id which is primary key is set to 0.  If not run this query: `DBCC CHECKIDENT (vehicles, RESEED, 0)` in sql 
-The test cases test for create, read, edit and delete scenarios.
-> Note: The test cases must run in the following sequence: 
-1. VerifyThatMyDatabaseConnectionStringExists
-2. TestCreateMake
-3.Test_Detail_Null
-4.Test_DetailView
-5.Test_Detail_Data
-6.Test_Edit_view
-7.Test_Edit_Data
-8. TestDeleteRedirect
+> Note: 	The test cases assumes the database is empty and id which is primary key is set to 0.  If not run this query: `DBCC CHECKIDENT (vehicles, RESEED, 0)` in sql . The test cases must run in the following sequence: 
+1. VerifyThatMyDatabaseConnectionStringExists<br />
+2. TestCreateMake<br />
+3.Test_Detail_Null<br />
+4.Test_DetailView<br />
+5.Test_Detail_Data<br />
+6.Test_Edit_view<br />
+7.Test_Edit_Data<br />
+8. TestDeleteRedirect<br />
 
